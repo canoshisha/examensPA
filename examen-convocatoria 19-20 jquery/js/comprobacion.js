@@ -17,58 +17,12 @@ $(document).ready(function () {
             comprobarVacio($(this));
         })
         ;
-
-
-
-
-    // $agrupacion
-    //     .bind('focus', function () {//chuleta
-    //         enfocado($agrupacion);
-    //     })
-
-    //     .bind('blur', function () {//chuleta
-    //         comprobarVacio($agrupacion);
-    //     })
-    //     ;
-
-    // $ciudad
-    //     .bind('focus', function () {
-    //         enfocado($ciudad);
-    //     })
-
-    //     .bind('blur', function () {
-    //         comprobarVacio($ciudad);
-    //     })
-    //     ;
-
-    // $contacto
-    //     .bind('focus', function () {
-    //         enfocado($contacto);
-    //     })
-
-    //     .bind('blur', function () {
-    //         comprobarVacio($contacto);
-    //     })
-    //     ;
-    // $email
-    //     .bind('focus', function () {
-    //         enfocado($email);
-    //     })
-
-    //     .bind('blur', function () {
-    //         comprobarVacio($email);
-    //     })
-    //     ;
     $numIntegrantes
         .bind('focus', function () {
             if($numIntegrantes.val()>1){
                 $numIntegrantes.change();
             }
         })
-
-        // .bind('blur', function () {
-        //     comprobarVacio($numIntegrantes);
-        // })
 
         .change(function () {//chuleta
             $("#componentes").empty();
@@ -133,14 +87,6 @@ $(document).ready(function () {
         });
     ;
     $modalidad
-        // .bind('focus', function () {//chuleta
-        //     enfocado($(this));
-        // })
-
-        // .bind('blur', function () {//chuleta
-        //     comprobarVacio($(this));
-        // })
-
         .change(
 
             function () {
