@@ -12,90 +12,112 @@ $(document).ready(function () {
     var $inputs = $('input');
 
 
-    $inputs
+    $unidades1
         .bind('focus', function () {
             conFoco($(this));
         })
         .bind('blur', function () {
             sinFoco($(this));
-        })
-        ;
+            numeroEntero($(this));
 
+        });
+
+    $precioUd1
+        .bind('focus', function () {
+            conFoco($(this));
+        })
+        .bind('blur', function () {
+            sinFoco($(this));
+            numeroEntero($(this));
+
+        });
+
+    $descripcion1
+        .bind('focus', function () {
+            conFoco($(this));
+        })
+        .bind('blur', function () {
+            sinFoco($(this));
+            expresionRegular($(this));
+
+        });
     $bontonMas
-        .click(function (e) { 
-            $filaAnterior=$('#fila'+contadorFilas);
+        .click(function (e) {
+            
+            $filaAnterior = $('#fila' + contadorFilas);
             contadorFilas++;
-            $filaAnterior.after('<tr id="fila'+contadorFilas+'"> </tr>');
-            $filaAcual = $('#fila'+contadorFilas);
-            $filaAcual.append('<td><input type="checkbox" id="sf1" name="sf'+contadorFilas+'" value="selected" /></td>');
-            $filaAcual.append('<td><input type="text" id="descripcion'+contadorFilas+'" name="descripcion'+contadorFilas+'" /></td>');
-            $filaAcual.append('<td><input type="text" id="precioUd'+contadorFilas+'" name="precioUd'+contadorFilas+'" /></td>')
-            $filaAcual.append('<td> <input type="text" id="unidades'+contadorFilas+'" name="unidades'+contadorFilas+'" /></td>');    
-            $filaAcual.append('<td><select name="tipoIva'+contadorFilas+'" id="tipoIva'+contadorFilas+'"><option value="21">21%</option><option value="10">10%</option><option value="4">4%</option></select></td>');
-            $filaAcual.append('<td id="totalConIva'+contadorFilas+'">0</td>');
+            $filaAnterior.after('<tr id="fila' + contadorFilas + '"> </tr>');
+            $filaAcual = $('#fila' + contadorFilas);
+            $filaAcual.append('<td><input type="checkbox" id="sf' + contadorFilas + '" name="sf' + contadorFilas + '" value="selected" /></td>');
+            $filaAcual.append('<td><input type="text" id="descripcion' + contadorFilas + '" name="descripcion' + contadorFilas + '" /></td>');
+            $filaAcual.append('<td><input type="text" id="precioUd' + contadorFilas + '" name="precioUd' + contadorFilas + '" /></td>')
+            $filaAcual.append('<td> <input type="text" id="unidades' + contadorFilas + '" name="unidades' + contadorFilas + '" /></td>');
+            $filaAcual.append('<td><select name="tipoIva' + contadorFilas + '" id="tipoIva' + contadorFilas + '"><option value="21">21%</option><option value="10">10%</option><option value="4">4%</option></select></td>');
+            $filaAcual.append('<td id="totalConIva' + contadorFilas + '">0</td>');
             $('input')
+                .bind('focus', function () {
+                    conFoco($(this));
+                })
+                .bind('blur', function () {
+                    sinFoco($(this));
+                })
+                ;
+            var j=2;    
+            while (j <= contadorFilas) {
+            $('#unidades' + j)
+                .bind('focus', function () {
+                    conFoco($(this));
+                })
+                .bind('blur', function () {
+                    sinFoco($(this));
+                    numeroEntero($(this));
+
+                });
+
+            $('#precioUd' + j)
+                .bind('focus', function () {
+                    conFoco($(this));
+                })
+                .bind('blur', function () {
+                    sinFoco($(this));
+                    numeroEntero($(this));
+
+                });
+
+            $('#descripcion' + j)
             .bind('focus', function () {
                 conFoco($(this));
             })
             .bind('blur', function () {
                 sinFoco($(this));
-            })
-            ;
-            $('#unidades'+contadorFilas)
-            .bind('blur', function () {
-                numeroEntero($('#unidades'+contadorFilas));
-            });
+                expresionRegular($(this));
     
-        $('#precioUd'+contadorFilas)
-            .bind('blur', function () {
-                numeroEntero($('#precioUd'+contadorFilas));
             });
-    
-        $('#descripcion'+contadorFilas)
-            .bind('blur', function () {
-                expresionRegular($('#descripcion'+contadorFilas));
-            });
-        });
-    
-
-
-    $unidades1
-        .bind('blur', function () {
-            numeroEntero($unidades1);
-        });
-
-    $precioUd1
-        .bind('blur', function () {
-            numeroEntero($precioUd1);
-        });
-
-    $descripcion1
-        .bind('blur', function () {
-            expresionRegular($descripcion1);
+            j++;
+        }
         });
 
     $('form').submit(function () {
         var enviar = true;
         var $errores = $('#errores');
         $errores.append('<ol>');
-        var i =1;
-        while(i<=contadorFilas){
-        if (!expresionRegular($('#descripcion'+contadorFilas))) {
-            $errores.append('<li> La descripcion no pasa el filtro</li>');
-            enviar = false;
+        var i = 1;
+        while (i <= contadorFilas) {
+            if (!expresionRegular($('#descripcion' + i))) {
+                $errores.append('<li> La descripcion de la fila' + i + ' no pasa el filtro</li>');
+                enviar = false;
+            }
+            if (!numeroEntero($('#unidades' + i))) {
+                $errores.append('<li> Las unidades de la fila' + i + ' no pueden ser menor que 0</li>');
+                enviar = false;
+            }
+            if (!numeroEntero($('#precioUd' + i))) {
+                $errores.append('<li>El precio de unidad de la fila' + i + ' no pueden ser menor que 0</li>');
+                enviar = false;
+            }
+            i++;
         }
-        if (!numeroEntero($('#unidades'+contadorFilas))) {
-            $errores.append('<li> Las unidades no pueden ser menor que 0</li>');
-            enviar = false;
-        }
-        if (!numeroEntero($('#precioUd'+contadorFilas))) {
-            $errores.append('<li>El precio de unidad no pueden ser menor que 0</li>');
-            enviar = false;
-        }
-        i++;
-    }
         $errores.append('</ol>');
-
         return enviar;
     });
 });
