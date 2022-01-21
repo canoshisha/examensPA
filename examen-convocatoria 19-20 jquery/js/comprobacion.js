@@ -77,24 +77,17 @@ $(document).ready(function () {
                             comprobarVacio($(this));
                         })
                         ;
-
                 }
-
-
-
             }
-
         });
     ;
     $modalidad
         .change(
-
             function () {
                 if ($numIntegrantes.val() > 0) {
                     $numIntegrantes.change();
                 }
             });
-
     $registro.submit(function () {//chuleta
         $agrupacion.blur();
         $ciudad.blur();
@@ -105,17 +98,13 @@ $(document).ready(function () {
         if($numIntegrantes.val()>0){
                 $('.componente').blur();
         }
-
         if (!$registro.find('span')) {
             return true;
         } else {
             return false;
         }
-
     });
-
 });
-
 
 function marcaError($elemento, mensaje) {
     if (!$elemento.next().is('span') && !$elemento.next('span').is('#error')) {//chuleta
@@ -123,7 +112,6 @@ function marcaError($elemento, mensaje) {
         $($elemento).after('<span class=error>' + mensaje + '</span>');//chuleta
     }
 }
-
 function enfocado($elemento) {
     $elemento.attr('style', "border: green 2px solid;");
     if ($elemento.next().is('span') && $elemento.next('span').hasClass('error')) {
@@ -132,9 +120,7 @@ function enfocado($elemento) {
         });
 
     }
-
 }
-
 function comprobarVacio($elemento) {
     if ($elemento.val() < 1) {//chuleta, recordar siempre poner el menos 1, con mayor que 0 no funciona
         marcaError($elemento, 'Este elemento se encuentra vacio');
