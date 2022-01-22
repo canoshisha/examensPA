@@ -1,15 +1,9 @@
 $(document).ready(function () {
     var contadorFilas = 1;
-    var $fila1 = $('#fila1');
-    var $sf1 = $('#sf1');
     var $bontonMas = $('#botonMas');
     var $descripcion1 = $('#descripcion1');
     var $precioUd1 = $('#precioUd1');
     var $unidades1 = $('#unidades1');
-    var $tipoIva1 = $('#tipoIva1');
-    var $totalConIva1 = $('#totalConIva1');
-    var $sumaTotalConIva = $('#sumaTotalConIva');
-    var $inputs = $('input');
 
 
     $unidades1
@@ -148,6 +142,10 @@ function expresionRegular($elemento) {
         $elemento.attr('style', 'border:; ');
         return true;
     }
+
+function actualizarCelda($elemento){
+    
+}
 }
 
 
