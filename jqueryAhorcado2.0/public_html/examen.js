@@ -1,36 +1,35 @@
 jQuery.fn.examen=function(action){
-    if(action=='comprobarRelleno'){
+    if(action==='comprobarRelleno'){
         comprobarRelleno($(this).attr('name'));
-    }else if(action=='limpiarMensajes'){
+    }else if(action==='limpiarMensajes'){
         limpiarMensajes($(this).attr('name'));
-    }else if(action=='validarEmail'){
-        validarEmail();
-    }else if(action=='hayErrores'){
-        hayErrores();
+    }else if(action==='validarEmail'){
+        validarEmail($(this));
+    }else if(action==='hayErrores'){
+       return hayErrores();
     }
     
 };
 function comprobarRelleno(nombre){
-    var elemento = $('input[name='+nombre+']');
-    if (elemento.length===0){
-//        var span = document.createElement('span'); // PRIMERA FORMA DE HACERLO
-//        span.setAttribute('class','error msg_'+nombre);
-//        span.appendChild('El' + nombre + 'debe estar relleno');
-          elemento.append('<span class="error msg_'+nombre+'">El '+nombre+' debe estar relleno </span>');
+    var elemento = $('[name='+nombre+']');
+    console.log(elemento.length);
+    if (elemento.val()<1){
+        console.log('llega aqui');
+          elemento.after('<span class="error msg_'+nombre+'">El '+nombre+' debe estar relleno </span>');
           
     }
 }
 function limpiarMensajes(nombre){
-        var elemento = $('input[name='+nombre+']');
-        if(elemento.next('span')){
+        var elemento = $('[name='+nombre+']');
+        if(elemento.next('span').length<=1){
             elemento.next('span').remove();
         }
 }
 
-function validarEmail(){
+function validarEmail(elemento){
     $expresion=/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    if(!$expresion.test($(this).val())){
-        $(this).append('<span class="error ">El email no tiene el formato correcto. </span>');
+    if(!$expresion.test(elemento.val())){
+        elemento.after('<span class="error ">El email no tiene el formato correcto. </span>');
     }
 }
 

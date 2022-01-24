@@ -40,17 +40,17 @@ $nombre
    });
    
    $contacto.submit(function (){
-       comprobarRelleno('nombre');
-       comprobarRelleno('apellidos');
-       comprobarRelleno('email');
-       comprobarRelleno('comentario');
-       validarEmail('email');
+        $nombre.focus();
+        $email.focus();
+        $apellidos.focus();
+        $comentario.focus();
+
+       $nombre.blur();
+       $email.blur();
+       $apellidos.blur();
+       $comentario.blur();
        
-       if(hayErrores()){
-           return false;
-       }else{
-            return true;
-       }    
+       return !hayErrores();   
 
    });
       
