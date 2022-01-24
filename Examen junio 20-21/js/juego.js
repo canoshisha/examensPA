@@ -58,7 +58,6 @@ for (var objeto in tableroJuego) {
     var front = document.createElement('div');
     card.appendChild(front);
     front.className = 'front';
-    // front.addEventListener('click',procesarClick(front));
     
 
     var back = document.createElement('div');
